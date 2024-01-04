@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-operators
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: acs-operator-group
+  namespace: openshift-operators
+spec:
+  targetNamespaces:
+  - openshift-operators
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: acs-subscription
+  namespace: openshift-operators
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: advanced-cluster-security-for-kubernetes
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: advanced-cluster-security-for-kubernetes.vX.Y.Z # Replace with the specific version you need
