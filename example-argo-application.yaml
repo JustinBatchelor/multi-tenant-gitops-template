@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: clusters/utility
+    repoURL: https://github.com/JustinBatchelor/multi-tenant-gitops-template
+    targetRevision: HEAD

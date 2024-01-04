@@ -1,28 +1,28 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: acs-operator
+  name: rhacs-operator
 ---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: acs-operator-group
-  namespace: acs-operator
+  name: rhacs-operator-group
+  namespace: rhacs-operator
 spec:
   targetNamespaces:
-  - openshift-operators
+  - rhacs-operator
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: acs-subscription
-  namespace: acs-operator
+  name: advanced-cluster-security
+  namespace: rhacs-operator
 spec:
   channel: stable
   installPlanApproval: Automatic
-  name: advanced-cluster-security-for-kubernetes
+  name: rhacs-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: advanced-cluster-security-for-kubernetes.vX.Y.Z # Replace with the specific version you need
+  startingCSV: update-me # Replace with the specific version you need
 ---
 ### need to add the instance of the operator here
