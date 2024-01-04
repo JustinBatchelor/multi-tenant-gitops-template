@@ -22,11 +22,11 @@ metadata:
   name: advanced-cluster-management
   namespace: open-cluster-management
 spec:
-  channel: stable
+  channel: release-2.9 
   installPlanApproval: Automatic
   name: advanced-cluster-management
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: update-me # Replace with the specific version you need
+  startingCSV: advanced-cluster-management.v2.9.1 # Replace with the specific version you need
 ---
 ### need to add the instance of the operator here
