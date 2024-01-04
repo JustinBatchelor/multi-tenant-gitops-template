@@ -14,11 +14,15 @@ This repo makes use of the following:
   ├── example-cluster-1
   │   ├── kustomization.yml
   env
-  ├── dev (2)
+  ├── bcp
   │   ├── kustomization.yml
-  ├── nonprod
+  ├── dev2
   │   ├── kustomization.yml
   ├── prod
+  │   ├── kustomization.yml
+  ├── uat
+  │   ├── kustomization.yml
+  ├── utility
   │   ├── kustomization.yml
   manifest (3)
   ├── argo (3a)
