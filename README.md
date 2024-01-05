@@ -10,9 +10,6 @@ This repo makes use of the following:
 ## Folder Breakdown
 
 ``` sh
-  cluster (1)
-  ├── example-cluster-1
-  │   ├── kustomization.yml
   env
   ├── bcp
   │   ├── kustomization.yml
@@ -24,36 +21,9 @@ This repo makes use of the following:
   │   ├── kustomization.yml
   ├── utility
   │   ├── kustomization.yml
-  manifest (3)
-  ├── argo (3a)
-  └── charts (3b)
 ```
 
-  1. Within each `cluster` folder, you'll find a Kustomize Template that represents a distinct cluster. These templates inherit from an `env` template.
-  2. Inside every `env` folder, you'll discover a Kustomize Template designed for shared resources within the environment.
-  3. The Manifest folder contains templates for deploying various architectural features.
-       - Contains a set of Kustomize Templates for deploying the Argo `Application` pointing to the appropriate Helm chart
-       - Contains a set of Helm Charts that represent the different components installed onto the cluster
+  - Inside every `env` folder, you'll discover a Kustomize Template designed for shared resources within the environment.
 
-## Cluster Management
 
-This section will talk about managing specific clusters using this repository.
-
-### Adding a New Cluster
-
-Once the inital install of the cluster has been completed use the following instructions for installation of the inital infrastructure
-
-#### Create Cluster Folder
-
-Create a new folder under the `/cluster` folder with an appropriately descriptive name. And a `kustomization.yml` file with the following content
-
-```yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - <resource.yaml>
-  - <resource1.yaml> ...
-
-```
 
