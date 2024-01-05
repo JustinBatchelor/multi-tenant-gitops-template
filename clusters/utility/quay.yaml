@@ -29,3 +29,27 @@ spec:
   sourceNamespace: openshift-marketplace
 ---
 ### need to add the instance of the operator here
+apiVersion: quay.redhat.com/v1
+kind: QuayRegistry
+metadata:
+  name: quayregistry
+  namespace: quay-operator
+spec:
+  configBundleSecret: example-quay-config-bundle-secret ## needs update
+  components:
+    - kind: clair
+      managed: false
+    - kind: redis
+      managed: true
+    - kind: postgres
+      managed: true
+    - kind: objectstorage
+      managed: true
+    - kind: route
+      managed: true
+    - kind: mirror
+      managed: false
+    - kind: monitoring
+      managed: false
+    - kind: tls
+      managed: false
