@@ -26,9 +26,6 @@ This repo makes use of the following:
   - Inside every sub directory of `clusters`, you'll discover a Kustomize Template designed for shared resources within the environment.
   - A list of `yaml` files defining the various resources required to deploy various infrastructure components to that specific cluster
 
-## Installing Gitops Operator
-
-
 ## Add components
 
 In order to add resources managed by gitops you will need to
