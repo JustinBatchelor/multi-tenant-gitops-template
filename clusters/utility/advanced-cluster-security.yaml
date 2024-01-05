@@ -3,6 +3,11 @@ kind: Namespace
 metadata:
   name: rhacs-operator
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stackrox
+---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -25,4 +30,21 @@ spec:
   sourceNamespace: openshift-marketplace
   startingCSV: update-me # Replace with the specific version you need
 ---
-### need to add the instance of the operator here
+apiVersion: stackrox.io/v1alpha1
+kind: Central
+metadata:
+  name: central
+  namespace: stackrox
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec: {}
+---
+apiVersion: stackrox.io/v1alpha1
+kind: SecuredCluster
+metadata:
+  name: stackrox-secured-cluster-services
+  namespace: stackrox
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  clusterName: "svc-openshift-utl"
