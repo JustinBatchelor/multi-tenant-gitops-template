@@ -29,6 +29,28 @@ spec:
   sourceNamespace: openshift-marketplace
   startingCSV: advanced-cluster-management.v2.9.1 # Replace with the specific version you need
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-project-manager
+rules:
+  - apiGroups: ["project.openshift.io"]
+    resources: ["projects"]
+    verbs: ["delete", "get", "list", "watch"] # Adjust verbs as needed
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-project-manager-binding
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  kind: ClusterRole
+  name: argocd-project-manager
+  apiGroup: rbac.authorization.k8s.io
+---
 ### need to add the instance of the operator here
 apiVersion: operator.open-cluster-management.io/v1
 kind: MultiClusterHub
