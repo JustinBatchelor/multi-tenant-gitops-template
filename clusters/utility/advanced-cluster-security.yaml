@@ -54,7 +54,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ---
-apiVersion: stackrox.io/v1alpha1
+apiVersion: platform.stackrox.io/v1alpha1
 kind: Central
 metadata:
   name: central
