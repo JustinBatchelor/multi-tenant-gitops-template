@@ -12,6 +12,7 @@ kind: OperatorGroup
 metadata:
   name: quay-operator-group
   namespace: quay-operator
+  argocd.argoproj.io/sync-wave: "1"
 spec:
   targetNamespaces:
     - quay-operator
@@ -19,14 +20,17 @@ spec:
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: quay-operator
-  namespace: quay-operator
+  name: quay-operator-subscription
+  namespace: openshift-operators
+  argocd.argoproj.io/sync-wave: "1"
 spec:
-  channel: patch-me-see-overlays-dir
+  channel: stable-3.10 # Or another channel representing the latest version
   installPlanApproval: Automatic
   name: quay-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+  startingCSV: quay-operator.v3.10.1 # Specify the desired starting CSV if needed
+
 ---
 ### need to add the instance of the operator here
 apiVersion: quay.redhat.com/v1
@@ -34,11 +38,12 @@ kind: QuayRegistry
 metadata:
   name: quayregistry
   namespace: quay-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
-  configBundleSecret: example-quay-config-bundle-secret ## needs update
   components:
     - kind: clair
-      managed: false
+      managed: true
     - kind: redis
       managed: true
     - kind: postgres
@@ -48,8 +53,8 @@ spec:
     - kind: route
       managed: true
     - kind: mirror
-      managed: false
+      managed: true
     - kind: monitoring
-      managed: false
+      managed: true
     - kind: tls
-      managed: false
+      managed: true
