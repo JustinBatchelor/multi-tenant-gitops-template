@@ -3,6 +3,7 @@ kind: Namespace
 metadata:
   annotations:
     openshift.io/display-name: "Red Hat Quay"
+    argocd.argoproj.io/sync-wave: "-5"
   labels:
     openshift.io/cluster-monitoring: 'true'
   name: quay-operator
@@ -37,7 +38,7 @@ metadata:
   name: quayregistry
   namespace: quay-operator
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   components:
     - kind: clair
