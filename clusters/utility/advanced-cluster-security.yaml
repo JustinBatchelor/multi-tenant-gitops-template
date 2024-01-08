@@ -17,7 +17,7 @@ metadata:
   name: advanced-cluster-security
   namespace: rhacs-operator
 spec:
-  channel: stable
+  channel: stable-4.10
   installPlanApproval: Automatic
   name: rhacs-operator
   source: redhat-operators
