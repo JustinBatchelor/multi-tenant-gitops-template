@@ -12,7 +12,6 @@ kind: OperatorGroup
 metadata:
   name: quay-operator-group
   namespace: quay-operator
-  argocd.argoproj.io/sync-wave: "1"
 spec:
   targetNamespaces:
     - quay-operator
@@ -22,7 +21,6 @@ kind: Subscription
 metadata:
   name: quay-operator-subscription
   namespace: openshift-operators
-  argocd.argoproj.io/sync-wave: "1"
 spec:
   channel: stable-3.10 # Or another channel representing the latest version
   installPlanApproval: Automatic
