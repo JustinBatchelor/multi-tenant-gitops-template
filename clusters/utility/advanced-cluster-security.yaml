@@ -28,9 +28,33 @@ spec:
   name: rhacs-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: update-me # Replace with the specific version you need
 ---
-apiVersion: stackrox.io/v1alpha1
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: acs-operator-manager
+  namespace: rhacs
+rules:
+  - apiGroups: ["platform.stackrox.io"]
+    resources: ["centrals", "scanners", "sensors"]
+    verbs: ["create", "get", "list", "watch", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-acs-manager-binding
+  namespace: rhacs
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  kind: Role
+  name: acs-operator-manager
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: platform.stackrox.io/v1alpha1
 kind: Central
 metadata:
   name: central
@@ -38,13 +62,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec: {}
----
-apiVersion: stackrox.io/v1alpha1
-kind: SecuredCluster
-metadata:
-  name: stackrox-secured-cluster-services
-  namespace: stackrox
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-spec:
-  clusterName: "svc-openshift-utl"
+# ---
+# apiVersion: platform.stackrox.io/v1alpha1
+# kind: SecuredCluster
+# metadata:
+#   name: stackrox-secured-cluster-services
+#   namespace: stackrox
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "2"
+# spec:
+#   clusterName: "svc-openshift-utl"

@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - quay.yaml
   - advanced-cluster-management.yaml
+  - advanced-cluster-security.yaml
 
   
