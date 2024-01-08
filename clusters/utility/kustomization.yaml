@@ -3,4 +3,6 @@ kind: Kustomization
 
 resources:
   - quay.yaml
+  - advacned-cluster-management.yaml
+  
   
