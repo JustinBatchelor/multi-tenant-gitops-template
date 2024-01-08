@@ -51,6 +51,30 @@ roleRef:
   name: argocd-project-manager
   apiGroup: rbac.authorization.k8s.io
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-multiclusterhub-manager
+  namespace: open-cluster-management
+rules:
+  - apiGroups: ["operator.open-cluster-management.io"]
+    resources: ["multiclusterhubs"]
+    verbs: ["create", "get", "list", "watch", "update", "delete"] # Adjust verbs as needed
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-multiclusterhub-manager-binding
+  namespace: open-cluster-management
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  kind: Role
+  name: argocd-multiclusterhub-manager
+  apiGroup: rbac.authorization.k8s.io
+---
 ### need to add the instance of the operator here
 apiVersion: operator.open-cluster-management.io/v1
 kind: MultiClusterHub
