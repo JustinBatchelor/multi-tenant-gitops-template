@@ -60,7 +60,7 @@ metadata:
   name: central
   namespace: stackrox
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "20"
 spec: {}
 # ---
 # apiVersion: platform.stackrox.io/v1alpha1
