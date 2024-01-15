@@ -1,15 +1,64 @@
 ## Helm values file to make templating operator values much easier
 
+# Advanced Cluster Management operator values
 acm:
+  # Variable to determine if the ACM operator should be installed
   enabled: false
+  # ACM subscription values to populate the acm-operator-base.yaml file
+  subscription:
+    channel: release-2.9
+    installPlanApproval: Automatic
+    startingCSV: advanced-cluster-management.v2.9.1
+  # ACM deployment is an empty object for now
+  deployment: {}
 
+# Advanced Cluster Security operator values
 acs:
+  # Variable to determine if the ACS operator should be installed
   enabled: false
+  # ACS subscription values to populate the acs-operator-base.yaml file
+  subscription:
+    channel: stable
+    installPlanApproval: Automatic
+    startingCSV: advanced-cluster-management.v2.9.1
+  # ACS deployment variables to manage the two object 
+  # (1) is the central object
+  # (2) is the securedCluster object
+  deployment:
+    # Central deployment is an empty object for now
+    central: {}
+    # SecuredCluster deployment values to populate the acs-deployment.yaml file
+    securedCluster:
+      name: svc-openshift-utl
 
+# Quay operator values
 quay:
+  # Variable to determine if the quay operator should be installed
   enabled: false
-
-
+  # Quay subscription values to populate the quay-operator-base.yaml file
+  subscription:
+    channel: stable-3.10
+    installPlanApproval: Automatic
+    startingCSV: quay-operator.v3.10.1
+  # Quay deployment values to populate the quay-deployment.yaml file
+  deployment:
+    components: 
+      clair:
+        managed: true
+      redis:
+        managed: true
+      postgres:
+        managed: true
+      objectstorage:
+        managed: true
+      route:
+        managed: true
+      mirror:
+        managed: true
+      monitoring:
+        managed: true
+      tls:
+        managed: true
 
 
     

@@ -1,0 +1,36 @@
+{{- if .Values.acs.enabled }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rhacs-operator
+  label:
+    argocd.argoproj.io/managed-by: openshift-gitops
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stackrox
+  label:
+    argocd.argoproj.io/managed-by: openshift-gitops
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: rhacs-operator
+spec: {}
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: advanced-cluster-security
+  namespace: rhacs-operator
+spec:
+  channel: {{ .Values.acs.subscription.channel | default "stable" }}
+  installPlanApproval: {{ .Values.acs.subscription.installPlanApproval | default "Automatic" }}
+  name: rhacs-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: {{ .Values.acs.subscription.startingCSV | default "advanced-cluster-management.v2.9.1" }}
+---
+{{- end }}

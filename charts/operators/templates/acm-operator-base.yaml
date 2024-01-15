@@ -4,9 +4,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: open-cluster-management
-  annotations:
-    openshift.io/display-name: "Advanced Cluster Management for Kubernetes"
-  labels:
+  label:
+    argocd.argoproj.io/managed-by: openshift-gitops
     openshift.io/cluster-monitoring: 'true'
 ---
 apiVersion: operators.coreos.com/v1
@@ -14,8 +13,6 @@ kind: OperatorGroup
 metadata:
   name: advanced-cluster-management-group
   namespace: open-cluster-management
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   targetNamespaces:
   - open-cluster-management
@@ -25,14 +22,12 @@ kind: Subscription
 metadata:
   name: advanced-cluster-management
   namespace: open-cluster-management
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
-  channel: release-2.9 
-  installPlanApproval: Automatic
+  channel: {{ .Values.acm.subscription.channel | default "release-2.9" }}
+  installPlanApproval: {{ .Values.acm.subscription.installPlanApproval | default "Automatic" }}
   name: advanced-cluster-management
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: advanced-cluster-management.v2.9.1
+  startingCSV: {{ .Values.acm.subscription.startingCSV | default "advanced-cluster-management.v2.9.0" }}
 ---
 {{- end }}
