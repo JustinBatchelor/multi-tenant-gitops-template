@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/helmfile.json": "file:///home/jbatchel/playground/multi-tenant-gitops-template/charts/operators/templates/advanced-cluster-management.yaml"
-    }
-}
