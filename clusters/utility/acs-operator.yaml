@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: acs-operator
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/JustinBatchelor/multi-tenant-gitops-template
+    targetRevision: HEAD
+    path: applications/operators/acs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-gitops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
