@@ -9,10 +9,6 @@ spec:
     repoURL: https://github.com/JustinBatchelor/multi-tenant-gitops-template
     targetRevision: HEAD
     path: applications/operators/quay
-    helm:
-      parameters:
-        - name: quay.enabled
-          value: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-gitops
