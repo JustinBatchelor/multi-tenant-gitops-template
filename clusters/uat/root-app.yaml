@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/JustinBatchelor/multi-tenant-gitops-template/'
     targetRevision: HEAD
-    path: clusters/utility
+    path: clusters/uat
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: openshift-gitops
