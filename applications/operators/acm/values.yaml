@@ -1,0 +1,13 @@
+# Advanced Cluster Management operator values
+acm:
+  # Variable to determine if the ACM operator should be installed
+  enabled: false
+  # ACM subscription values to populate the acm-operator-base.yaml file
+  subscription:
+    channel: release-2.9
+    installPlanApproval: Automatic
+    startingCSV: advanced-cluster-management.v2.9.1
+  # ACM deployment is an empty object for now
+  deployment: {}
+
+
